@@ -1,0 +1,12 @@
+SELECT ast1.cname AS com1, ast2.cname AS com2, ast3.cname AS com3 
+	FROM (SELECT * FROM astronauts WHERE astronauts.military = true) AS ast1 
+		JOIN astronauts AS ast2 
+			JOIN (SELECT * FROM astronauts WHERE astronauts.military = false) AS ast3 
+			ON ast2.cname != ast3.cname 
+		ON (ast1.cname != ast2.cname)
+	WHERE (ast1.ages < 35 OR ast2.ages < 35 OR ast3.ages < 35) 
+		AND ((ast1.gender = 'f' AND ast1.ages > ast2.ages AND ast1.ages > ast3.ages) OR ast1.gender = 'm') 
+		AND ((ast1.gender = 'f' AND ast2.gender = 'm' AND ast3.gender = 'm') 
+			 OR (ast1.gender = 'm' AND ast2.gender = 'f' AND ast3.gender = 'm')
+			 OR (ast1.gender = 'm' AND ast2.gender = 'm' AND ast3.gender = 'f')
+			 OR (ast1.gender = 'm' AND ast2.gender = 'm' AND ast3.gender = 'm'));

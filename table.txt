@@ -1,0 +1,14 @@
+CREATE TABLE IF NOT EXISTS public.astronauts
+(
+    idastro character(5) COLLATE pg_catalog."default" NOT NULL,
+    cname character varying(30) COLLATE pg_catalog."default",
+    gender character(1) COLLATE pg_catalog."default",
+    ages numeric(2,0),
+    military boolean,
+    CONSTRAINT astronauts_pkey PRIMARY KEY (idastro)
+)
+
+TABLESPACE pg_default;
+
+ALTER TABLE IF EXISTS public.astronauts
+    OWNER to postgres;
